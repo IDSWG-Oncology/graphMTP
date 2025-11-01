@@ -7,7 +7,9 @@ library(TrialSimulator)
 library(jsonlite)
 
 ui <- navbarPage(
-  "My Application",
+  title = tags$div(
+    tags$img(src="https://i.ibb.co/yFzV7v9r/IDSWG-logo.png", height="40px"), 
+    "Interactive Graphical Multiple Testing Procedure (MTP)"),
   id = "nav",
   theme = bslib::bs_theme(
   version = 5,
@@ -16,9 +18,7 @@ ui <- navbarPage(
   heading_font= bslib::font_google("Source Sans 3"),
   "font-size-base" = "0.93rem",
   "line-height-base" = 1.45
-)
-
-  ,
+),
   
   # ----------- HOME -----------
   tabPanel(
@@ -76,10 +76,10 @@ ui <- navbarPage(
           tags$video(
             class = "landing-logo",
             autoplay = NA, loop = NA, muted = NA, playsinline = NA,
-            poster = "graphical_testing_image.png",
+            poster = "https://i.ibb.co/8LPz2YMT/graph-MTP-logo.png",
             tags$source(src = "logo.mp4", type = "video/mp4"),
             # Fallback image if video can't play:
-            tags$img(src = "graphical_testing_image.png", height = "220px")
+            tags$img(src = "https://i.ibb.co/8LPz2YMT/graph-MTP-logo.png", height = "220px")
           ),
           div(class = "brand",
               tags$h2(class = "app-title", "Graphical Approach for Multiple Testing"),
@@ -93,9 +93,19 @@ ui <- navbarPage(
         column(12,
                tags$div(style = "padding: 20px;",
                         tags$h3("🧬 Introduction"),
-                        tags$p("With the rise of innovative trial designs—such as adaptive and platform studies—clinical researchers and statisticians face growing complexity in managing multiple hypotheses while preserving statistical rigor. Traditional fixed-sequence procedures often fall short in these evolving contexts."),
-                        tags$p("Graphical Approach for Multiple Testing Procedure is a visual and interactive tool built to meet this challenge. Grounded in the graphical methodology pioneered by Bretz et al., it offers a transparent way to design, test, and dynamically redistribute alpha levels across networks of hypotheses."),
-                        tags$p("This app was developed in collaboration with methodologists, researchers, and developers committed to making advanced statistical design accessible, reproducible, and human-centered. While still evolving, it is built on the open-source TrialSimulator R package and maintained by a volunteer team.")
+                        tags$p("The graphical approach of the non-parametric multiple testing procedure (Bretz et al.) is commonly 
+                               used in pharmaceutical industry to strongly control the familywise type I error rate. 
+                               One complexity is to determine the weights 
+                               between hypotheses and alpha re-allocation following the rejection of one or 
+                               more null hypotheses. An R Shiny app is created based on the R package trialsimulator that implements the algebra. 
+                               This user-friendly App ensures the correct implementation of the non-parametric multiple
+                               testing procedure. At study design stage, this R Shiny App can be useful to optimize the
+                               study design strategy; and at time of interim/final analysis, it is a peace of mind to 
+                               implement the multiple testing procedure. This work was conducted by IDSWG Oncology 
+                               working group and the R shiny app is publicly available at 
+                               https://github.com/IDSWG-Oncology/graphMTP and the current version is deployed at
+                               https://oncotrialdesign.shinyapps.io/graphMTP/."),
+                        tags$p("")
                )
         )
       ),
@@ -109,34 +119,34 @@ ui <- navbarPage(
         ),
         column(4,
                div(class = "feature-card fc-2",
-                   div(class = "feature-title", "🔗 Smart Edge Management"),
+                   div(class = "feature-title", "🔗 Weights (Edges)"),
                    div(class = "feature-text", "Right-click nodes to start edges, click targets to connect, and double-click to edit weights with automatic validation.")
                )
         ),
         column(4,
                div(class = "feature-card fc-3",
-                   div(class = "feature-title", "⚡ Real-time Editing"),
-                   div(class = "feature-text", "Double-click nodes or edges to edit properties instantly. All changes reflect immediately with live validation.")
+                   div(class = "feature-title", "⚡  Hypothesis (Nodes)"),
+                   div(class = "feature-text", "Double-click nodes or edges to edit properties instantly.")
                )
         )
       ),
       fluidRow(
         column(4,
                div(class = "feature-card fc-4",
-                   div(class = "feature-title", "🧮 Alpha Management"),
-                   div(class = "feature-text", "Allocate alpha levels with automatic sum validation (≤ 1), supporting dynamic α-spending rules for sequential testing.")
+                   div(class = "feature-title", "🧮 Alpha"),
+                   div(class = "feature-text", "Editor alpha allocation at initial setup, and the re-allocated alpha will be automatically calculated according hypothesis testing results.")
                )
         ),
         column(4,
                div(class = "feature-card fc-5",
-                   div(class = "feature-title", "📊 Testing Simulation"),
-                   div(class = "feature-text", "Create test objects and simulate hypothesis rejections with real-time graph updates showing rejected hypotheses.")
+                   div(class = "feature-title", "📊 Hypothesis Testing"),
+                   div(class = "feature-text", "Display the graph resulted from hypothesis rejections with updated weights and alpha.")
                )
         ),
         column(4,
                div(class = "feature-card fc-6",
-                   div(class = "feature-title", "💾 Data Management"),
-                   div(class = "feature-text", "Import/export graphs as JSON files, with live data tables showing nodes and edges for easy collaboration.")
+                   div(class = "feature-title", "💾 Import / Export Graphs"),
+                   div(class = "feature-text", "Import/export graphs as json files. Saved jason file can be reloaded to display the graph.")
                )
         )
       ),
@@ -153,15 +163,27 @@ ui <- navbarPage(
                             tags$a(href = "https://doi.org/10.1002/sim.3495", "https://doi.org/10.1002/sim.3495")
                           ),
                           tags$li(
-                            tags$span("TrialSimulator R package: "),
+                            tags$span("TrialSimulator R package:"),
                             tags$a(href = "https://zhangh12.github.io/TrialSimulator/", 
                                    "zhangh12.github.io/TrialSimulator/")
                           )
-                        )
-               )
+                        ),
+                        tags$h3("📊  App Developer and Maintainer:"),
+                        tags$ul(
+                          tags$li(
+                            tags$span("Phan Nguyen Huong Le, Rutgers University, and Mengyang Yi, Johns Hopskins University")
+                          )),
+                        tags$h3("🔗 Contact:"),
+                        tags$ul(
+                          tags$li(
+                            tags$span("oncotrialdesign-AT-gmail.com. MIT License.")
+                          )),
+                     ),
+               
         )
       ),
       # Footer
+        
       fluidRow(
         column(12, align = "center",
                tags$hr(),
